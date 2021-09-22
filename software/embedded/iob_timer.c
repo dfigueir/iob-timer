@@ -43,7 +43,7 @@ unsigned long long timer_get_count() {
   timer_total |= timer_low;
   
   return timer_total;
-} 
+}
 
 //get time in specified time unit (inverse of sample rate)
 unsigned int timer_time_tu(int sample_rate) {
@@ -74,3 +74,21 @@ unsigned int timer_time_ms() {
 unsigned int timer_time_s() {
   return timer_time_tu(1);
 }
+
+// enable timer interrupt
+void timer_interrupt_enable() {
+  IO_SET(base, TIMER_INTERRUPT_ENABLE, 1);
+}
+
+// disable timer interrupt
+void timer_interrupt_disable() {
+  IO_SET(base, TIMER_INTERRUPT_ENABLE, 0);
+}
+
+// set timer interrupt period
+void timer_set_interrupt_period(unsigned long long period) {
+  IO_SET(base, TIMER_INTERRUPT_PERIOD_LOW,  (unsigned long) period);
+  IO_SET(base, TIMER_INTERRUPT_PERIOD_HIGH, (unsigned long) (period >> 32));
+}
+
+// EOF

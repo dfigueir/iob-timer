@@ -11,3 +11,6 @@ unsigned int timer_time_tu(int sample_rate);
 unsigned int timer_time_us();
 unsigned int timer_time_ms();
 unsigned int timer_time_s();
+void timer_interrupt_enable();
+void timer_interrupt_disable();
+void timer_set_interrupt_period(unsigned long long period);
