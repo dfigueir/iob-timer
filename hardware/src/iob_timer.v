@@ -23,15 +23,13 @@ module iob_timer
     `SIGNAL(rst_int, 1)
     `COMB rst_int = rst | TIMER_RESET;
 
-    //write signal
-    `SIGNAL(write, 1)
-    `COMB write = | wstrb;
-
     //
     //BLOCK 64-bit time counter & Free-running 64-bit counter with enable and soft reset capabilities
     //
-    `SIGNAL    (TIMER_INTERRUPT_PERIOD, 2*DATA_W)
-    `SIGNAL_OUT(TIMER_VALUE,            2*DATA_W)
+    `SIGNAL(TIMER_INTERRUPT_PERIOD, 2*DATA_W)
+    `COMB   TIMER_INTERRUPT_PERIOD = {TIMER_INTERRUPT_PERIOD_HIGH, TIMER_INTERRUPT_PERIOD_LOW};
+
+    `SIGNAL_OUT(TIMER_VALUE, 2*DATA_W)
     timer_core timer0
         (
             .TIMER_ENABLE(TIMER_ENABLE),

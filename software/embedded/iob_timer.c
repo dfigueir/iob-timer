@@ -1,6 +1,7 @@
 #include "interconnect.h"
 #include "iob_timer.h"
 #include "TIMERsw_reg.h"
+#include "printf.h"
 
 //base address
 static int base;
@@ -87,6 +88,9 @@ void timer_interrupt_disable() {
 
 // set timer interrupt period
 void timer_set_interrupt_period(unsigned long long period) {
+  unsigned long long current = timer_get_count();
+  
+  period += timer_get_count();
   IO_SET(base, TIMER_INTERRUPT_PERIOD_LOW,  (unsigned long) period);
   IO_SET(base, TIMER_INTERRUPT_PERIOD_HIGH, (unsigned long) (period >> 32));
 }
