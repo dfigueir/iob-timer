@@ -1,5 +1,12 @@
 #pragma once
 
+
+// Constants
+
+#define TIMER_INTERRUPT_PERIOD 100
+
+
+
 //Functions
 void timer_reset();
 void timer_start();	
